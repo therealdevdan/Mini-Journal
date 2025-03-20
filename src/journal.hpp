@@ -156,7 +156,7 @@ public:
 
 class Admin : public User 
 {
-private:    
+private:    // Admin DATABASE
     unordered_map<string, pair<string, unordered_map<string, vector<string>>>> & data_st;
     std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> &reviews;
     std::unordered_map<string, string> &homeworks;
@@ -465,7 +465,7 @@ public:
 
 class Student : public User 
 {
-private:
+private: // STUDENT DATABASE
     std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>>& data_st;
     std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>>& reviews;
     std::unordered_map<string, string> & homeworks;
