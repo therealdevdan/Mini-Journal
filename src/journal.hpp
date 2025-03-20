@@ -1,6 +1,7 @@
 #ifndef JOURNAL_HPP
 #define JOURNAL_HPP
 
+
 #include <iostream>
 #include <cstring>
 #include <string>
@@ -26,6 +27,8 @@ using unor_map_lst = std::unordered_map<std::string, std::pair<std::string, std:
 auto timeSleep_oneSec = []() { std::this_thread::sleep_for(std::chrono::seconds(1)); };
 auto ignoreEnter = []() { std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); };
 
+
+//turn off all spaces ...
 
 using std::string;
 using std::unordered_map;
