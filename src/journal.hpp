@@ -639,7 +639,7 @@ public:
         if(it != data_st.end())
         {
             // std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>>
-            //                         .first           .second                           .second.second (3)         .second.second.second (4)    
+            //                         .first           .second                           .second.second (3)        
             for(auto &[day, lessons] : it->second.second /*unor map опция 3*/ )
             {
                 cout << "--- Your schedule is for " << day << " ---" << endl;
@@ -661,16 +661,17 @@ public:
 
 };
 
-class SystemManager 
+class SystemManager /* management of the entire system of data structures */
 {
 private:
-    std::unordered_map<std::string, std::string> data_admin;
-    std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>> data_st;
-    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> reviews;
+    std::unordered_map<std::string, std::string> data_admin; // Database for administration (admin) 
+    std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>> data_st;// Database for student
+    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> reviews; // Database for using reviews (for both admins and students)
 
-    std::unordered_map<string ,string> homeworks;
-    std::unordered_map<std::string, std::pair<std::string, std::string>> msgAdmin;
-
+    std::unordered_map<string ,string> homeworks; // Storing homework
+    std::unordered_map<std::string, std::pair<std::string, std::string>> msgAdmin; // Storing messages for both admins and students
+    
+    // Restrictions on filling in fields (login and password)
     bool containsDigit(const string& str) 
     {
         return any_of(str.begin(), str.end(), [](char ch) {
@@ -695,7 +696,7 @@ private:
     }
 
 public:
-
+    // Create your login and password
     void registration(bool isAdmin)
     {
         clearConsole();
@@ -743,6 +744,7 @@ public:
                 SizeIsTrue = true;
             }
 
+            // Rules for filling in fields correctly (login and password)
             if(!isFirstCharacterUppercase(log)) 
             {
                 cout << "VIOLATION OF RULES! ->> Login MUST contain the first capital letter" << endl;
@@ -841,7 +843,7 @@ public:
         timeSleep_oneSec();
         clearConsole();
     }
-
+    // Entrance
     User* login(bool isAdmin) 
     {
         clearConsole();
