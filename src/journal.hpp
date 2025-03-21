@@ -28,8 +28,8 @@ auto timeSleep_oneSec = []() { std::this_thread::sleep_for(std::chrono::seconds(
 auto ignoreEnter = []() { std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); };
 
 
-//turn off all spaces ...
-
+//turn off all spaces ... (выключение всех пространств)
+using std::cerr;
 using std::string;
 using std::unordered_map;
 using std::vector;
@@ -41,6 +41,7 @@ using std::endl;
 using std::getline;
 using std::make_pair;
 using std::time;
+using std::exception;
 using std::any_of;
 using std::isdigit;
 using std::ispunct;
@@ -49,7 +50,6 @@ using std::numeric_limits;
 using std::streamsize;
 using std::chrono::seconds;
 using std::this_thread::sleep_for;
-using std::exception;
 using std::ctime;
 
 
@@ -60,7 +60,8 @@ using std::ctime;
 #define CLEAR_SCREEN "clear" /* for linux */
 #endif
 
-/* for clear Console */
+/* for clear Console */ 
+// (для очистки консоли)
 
 void clearConsole() 
 {
@@ -138,7 +139,7 @@ public:
             return this;
         }
     
-        log = NewLog;
+        log = NewLog; // data overwriting (перезапись данных)
         pwd = NewPwd;
 
         cout << endl;
@@ -156,14 +157,15 @@ public:
 
 class Admin : public User 
 {
-private:    // Admin DATABASE
+protected: // // Admin DATABASE (база данных для админов)
+    std::unordered_map<std::string, std::pair<std::string, std::string>>& msgAdmin;
+private:    
     unordered_map<string, pair<string, unordered_map<string, vector<string>>>> & data_st;
     std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> &reviews;
     std::unordered_map<string, string> &homeworks;
-    std::unordered_map<std::string, std::pair<std::string, std::string>>& msgAdmin;
 public:
 
-    Admin()=default;
+    Admin() noexcept = default;
 
     Admin(const string& log, const string& pwd, std::unordered_map<std::string, std::pair<std::string, 
     std::unordered_map<std::string, std::vector<std::string>>>> &data_student, 
@@ -187,15 +189,15 @@ public:
             cout << endl;
             cout << "--------------------------Admin menu--------------------------" << endl;
             cout << endl;
-            cout << "1. Add schedule" << endl;
-            cout << "2. Write a review about a student" << endl;
-            cout << "3. Write homework" << endl;
-            cout << "4. Personal account" << endl;
-            cout << "5. Show list of all students" << endl;
-            cout << "6. View personal message box" << endl;
-            cout << "7. Proceed to role selection" << endl;
+            cout << "1. Add schedule" << endl; // Добавить расписание
+            cout << "2. Write a review about a student" << endl; // Написать отзыв об студенте
+            cout << "3. Write homework" << endl; // Написать домашнее задание
+            cout << "4. Personal account" << endl; // Персональные данные (личный кабинет)
+            cout << "5. Show list of all students" << endl; // Показать список всех зарегестрированных студенческих аккаунтов
+            cout << "6. View personal message box" << endl; // Показать персональные сообщения от студентов адресованные админам
+            cout << "7. Proceed to role selection" << endl; // Перейти к выбору роли (студент/админ)
 
-            cout << "\nEnter the number: ";
+            cout << "\nEnter the number: "; 
             int action;
 
             cin >> action;
@@ -465,13 +467,15 @@ public:
 
 class Student : public User 
 {
-protected: // Student Data base
+protected: // Student Data base (База данных студентов для хранения логинов, паролей, дз и отзывов от админов и сообщения для них)
     std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>>& data_st;
 private:
-    std::unordered_map<string, std::pair<string, string>> & msgAdmin;
-    std::unordered_map<string, string> & homeworks;
-    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>>& reviews;
+    std::unordered_map<string, std::pair<string, string>> & msgAdmin; // сообщениях которые адресованные администрации
+    std::unordered_map<string, string> & homeworks; // ДЗ от админов
+    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>>& reviews; // отзывы от админов
 public:
+    Student() noexcept = default;
+
     Student(const std::string& log, const std::string& pwd, std::unordered_map<std::string, 
     std::pair<std::string, std::unordered_map<std::string, 
     std::vector<std::string>>>>& data_student, std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> &rev, 
@@ -494,13 +498,13 @@ public:
         {
             cout << "------------------------Student menu------------------------" << endl;
             cout << endl;
-            cout << "1. View schedule" << endl;
-            cout << "2. View homework" << endl;
-            cout << "3. View educational materials" << endl;
-            cout << "4. View reviews" << endl;
-            cout << "5. Personal account" << endl;
-            cout << "6. Write to the administration" << endl;
-            cout << "7. Proceed to role selection" << endl;
+            cout << "1. View schedule" << endl; // Показать расписание
+            cout << "2. View homework" << endl; // Показать ДЗ
+            cout << "3. View educational materials" << endl; // Показать учебные материалы
+            cout << "4. View reviews" << endl; // Показать отзывы обо мне (адресованные лично на мой логин)
+            cout << "5. Personal account" << endl; // Персональные данные (Личный кабинет)
+            cout << "6. Write to the administration" << endl; // Написать администрации
+            cout << "7. Proceed to role selection" << endl; // Перейти к выбору роли (студент/админ)
 
             cout << "\nEnter the number: ";
 
@@ -665,14 +669,14 @@ public:
 class SystemManager /* management of the entire system of data structures */
 {
 private:
-    std::unordered_map<std::string, std::string> data_admin; // Database for administration (admin) 
-    std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>> data_st;// Database for student
-    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> reviews; // Database for using reviews (for both admins and students)
+    std::unordered_map<std::string, std::string> data_admin; // Database for administration (admin) (База данных админов)
+    std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>> data_st;// Database for student (База данных студентов)
+    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>> reviews; // Database for using reviews (for both admins and students) (База данных для хранения отзывов)
 
-    std::unordered_map<string ,string> homeworks; // Storing homework
-    std::unordered_map<std::string, std::pair<std::string, std::string>> msgAdmin; // Storing messages for both admins and students
+    std::unordered_map<string ,string> homeworks; // Storing homework (Хранение ДЗ)
+    std::unordered_map<std::string, std::pair<std::string, std::string>> msgAdmin; // Storing messages for both admins and students (Хранения сообщений)
     
-    // Restrictions on filling in fields (login and password)
+    // Restrictions on filling in fields (login and password) (Правила верного заполнения регистрации и входа)
     bool containsDigit(const string& str) 
     {
         return any_of(str.begin(), str.end(), [](char ch) {
@@ -697,7 +701,7 @@ private:
     }
 
 public:
-    // Create your login and password
+    // Create your login and password (Создание своего логина и пароля)
     void registration(bool isAdmin)
     {
         clearConsole();
@@ -745,7 +749,7 @@ public:
                 SizeIsTrue = true;
             }
 
-            // Rules for filling in fields correctly (login and password)
+            // Rules for filling in fields correctly (login and password) (Корректировка создания своего логина и пароля)
             if(!isFirstCharacterUppercase(log)) 
             {
                 cout << "VIOLATION OF RULES! ->> Login MUST contain the first capital letter" << endl;
