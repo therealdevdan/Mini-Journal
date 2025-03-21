@@ -32,7 +32,7 @@ namespace MyExceptions
             { }
         
         protected:
-            std::string msg;
+            string msg;
     };
 
     class ErrorAnswerAdmin : public ErrorAnswerUser
