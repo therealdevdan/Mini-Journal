@@ -1,62 +1,62 @@
 ```markdown
-# Электронный журнал
+# Electronic Journal
 
-Это проект электронного журнала, написанный на C++. Проект состоит из трех основных файлов:
+This is an electronic journal project written in C++. The project consists of three main files:
 
-- `exceptions.hpp` — заголовочный файл, содержащий классы исключений для обработки ошибок.
-- `journal.hpp` — заголовочный файл, содержащий класс `Journal`, который реализует функциональность электронного журнала.
-- `main.cpp` — основной файл, содержащий точку входа в программу.
+- `exceptions.hpp` — a header file containing exception classes for error handling.
+- `journal.hpp` — a header file containing the `Journal` class, which implements the functionality of the electronic journal.
+- `main.cpp` — the main file containing the program's entry point.
 
-## Сборка проекта
+## Building the Project
 
-Для сборки проекта вам понадобится компилятор C++ (например, `g++`).
+To build the project, you will need a C++ compiler (e.g., `g++`).
 
-1. Убедитесь, что у вас установлен компилятор C++. Если нет, установите его:
-   - Для Linux: `sudo apt install g++`
-   - Для macOS: `xcode-select --install`
-   - Для Windows: установите [MinGW](http://www.mingw.org/) или используйте [MSVC](https://visualstudio.microsoft.com/).
+1. Ensure that you have a C++ compiler installed. If not, install it:
+   - For Linux: `sudo apt install g++`
+   - For macOS: `xcode-select --install`
+   - For Windows: install [MinGW](http://www.mingw.org/) or use [MSVC](https://visualstudio.microsoft.com/).
 
-2. Клонируйте репозиторий (если вы еще этого не сделали):
+2. Clone the repository (if you haven't already):
    ```bash
-   git clone https://github.com/ваш-username/electronic-journal.git
+   git clone https://github.com/your-username/electronic-journal.git
    cd electronic-journal
    ```
 
-3. Скомпилируйте проект:
+3. Compile the project:
    ```bash
    g++ -o electronic_journal main.cpp
    ```
 
-4. Запустите программу:
+4. Run the program:
    ```bash
    ./electronic_journal
    ```
 
-## Структура проекта
+## Project Structure
 
-- **`exceptions.hpp`** — содержит классы исключений, которые используются для обработки ошибок в программе.
-- **`journal.hpp`** — содержит класс `Journal`, который реализует основную логику электронного журнала (добавление, удаление, редактирование записей и т.д.).
-- **`main.cpp`** — точка входа в программу. Здесь происходит инициализация журнала и взаимодействие с пользователем.
+- **`exceptions.hpp`** — contains exception classes used for error handling in the program.
+- **`journal.hpp`** — contains the `Journal` class, which implements the core logic of the electronic journal (adding, deleting, editing entries, etc.).
+- **`main.cpp`** — the program's entry point. This is where the journal is initialized and user interaction takes place.
 
-## Использование
+## Usage
 
-После запуска программы вы увидите меню, в котором можно:
-- Добавить новую запись в журнал.
-- Просмотреть существующие записи.
-- Редактировать или удалить записи.
-- Выйти из программы.
+After running the program, you will see a menu where you can:
+- Add a new entry to the journal.
+- View existing entries.
+- Edit or delete entries.
+- Exit the program.
 
-## Пример работы
+## Example
 
 ```plaintext
-Добро пожаловать в электронный журнал!
-1. Добавить запись
-2. Просмотреть записи
-3. Редактировать запись
-4. Удалить запись
-5. Выйти
-Выберите действие: 1
-Введите имя студента: Иван Иванов
-Введите оценку: 5
-Запись успешно добавлена!
+Welcome to the Electronic Journal!
+1. Add an entry
+2. View entries
+3. Edit an entry
+4. Delete an entry
+5. Exit
+Choose an action: 1
+Enter student name: Ivan Ivanov
+Enter grade: 5
+Entry successfully added!
 ```
