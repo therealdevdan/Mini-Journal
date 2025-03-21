@@ -17,6 +17,7 @@
 #include "exception.hpp"
 #include "journal.hpp" 
 
+using namespace std;
 
 signed int main(void) 
 {
