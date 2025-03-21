@@ -465,11 +465,12 @@ public:
 
 class Student : public User 
 {
-private: // STUDENT DATABASE
+protected: // Student Data base
     std::unordered_map<std::string, std::pair<std::string, std::unordered_map<std::string, std::vector<std::string>>>>& data_st;
-    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>>& reviews;
-    std::unordered_map<string, string> & homeworks;
+private:
     std::unordered_map<string, std::pair<string, string>> & msgAdmin;
+    std::unordered_map<string, string> & homeworks;
+    std::unordered_map<std::string, std::vector<std::pair<std::string, std::string>>>& reviews;
 public:
     Student(const std::string& log, const std::string& pwd, std::unordered_map<std::string, 
     std::pair<std::string, std::unordered_map<std::string, 
@@ -491,7 +492,7 @@ public:
 
         while(inMenu) 
         {
-            cout << "--------------------------Student menu--------------------------" << endl;
+            cout << "------------------------Student menu------------------------" << endl;
             cout << endl;
             cout << "1. View schedule" << endl;
             cout << "2. View homework" << endl;
