@@ -28,13 +28,13 @@ signed int main(void)
         while(!exitProgram) 
         {
             clearConsole();
-            cout <<"<<< To select one of the items, write the number below >>>" << endl;
+            cout <<"<<< To select one of the items, write the number below >>>" << endl; // Для выбора, ниже напиши номер указывающий на пункт справа
             cout << "\n";
-            cout <<"\t1 *Admin registration" << endl;
-            cout <<"\t2 *Admin login" << endl;
-            cout <<"\t3 *Student registration" << endl;
-            cout <<"\t4 *Student login" << endl;
-            cout <<"\t5 *Exit" << endl;
+            cout <<"\t1 *Admin registration" << endl; // Регистрация для админов и преподавателей
+            cout <<"\t2 *Admin login" << endl; // Вход для админов
+            cout <<"\t3 *Student registration" << endl; // Регистрация для студентов
+            cout <<"\t4 *Student login" << endl; // Вход для студентов
+            cout <<"\t5 *Exit" << endl; // Выход
 
             int choice;
 
@@ -72,7 +72,7 @@ signed int main(void)
                     exitProgram=true;
                     break;
                 default:
-                    cout << "Invalid command!" << endl;
+                    cout << "Invalid command!" << endl; // Неверная команда
             }
         }
     }
